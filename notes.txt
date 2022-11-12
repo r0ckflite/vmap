@@ -1,0 +1,31 @@
+additional changes:
+
+1. when you slide, update map : DONE
+2. calcs for kva color : DONE
+
+green : Kw < kva*.8
+yellow : kw < kva*.98
+red : k2 > kva*.98
+
+
+3. graph close buttons broken : DONE
+
+4. kva graph change type : 
+
+stacked bar chart
+solid line across top with is xfmr kva : done (red line)
+
+5. voltage changes :
+
+230 line, 250 line
+4 graphs in a 2x2 in the modal
+
+6. on both charts
+ability to zoom time scale with mouse
+
+
+
+
+
+
+
