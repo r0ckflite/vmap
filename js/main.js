@@ -23,6 +23,23 @@ var main = new Object();
     return this.end_date.val();
   };
 
+  p.isInitialized = function () {
+    if (this.xfmrs == null) {
+      $(".container").prepend(
+        '<div id="alert1" class="alert alert-warning alert-dismissible fade show align-self-end">' +
+          "<strong>Please load data first!" +
+          "</div>"
+      );
+      $("#alert1")
+        .fadeTo(2000, 500)
+        .slideUp(500, function () {
+          $("#alert1").slideUp(500);
+        });
+      return false;
+    }
+    return true;
+  };
+
   p.start = function () {
     var that = this;
     var mapProp = {
@@ -48,9 +65,23 @@ var main = new Object();
         config: new config.Config(that.map),
         endDate: that.getEndDate(),
       });
+      $(".gm-init-hide").removeClass("gm-init-hide");
+    });
+
+    $(".after-load").attr("disabled", true);
+
+    $("#showDateText").keypress(function (event) {
+      var keycode = event.keyCode ? event.keyCode : event.which;
+      if (keycode == "13") {
+        let dateString = $("#showDateText").val();
+        console.debug("goto button pressed with date string : " + dateString);
+        that.xfmrs.draw(dateString);
+        rs.setDate(dateString);
+      }
     });
 
     $("#goto").click(function () {
+      if (!that.isInitialized()) return;
       let dateString = $("#showDateText").val();
       console.debug("goto button pressed with date string : " + dateString);
       that.xfmrs.draw(dateString);
@@ -58,10 +89,12 @@ var main = new Object();
     });
 
     $("#radio1").change(function () {
+      if (!that.isInitialized()) return;
       console.debug("value : " + this.value);
       that.xfmrs.setType(this.value);
     });
     $("#radio2").change(function () {
+      if (!that.isInitialized()) return;
       console.debug("value : " + this.value);
       that.xfmrs.setType(this.value);
     });

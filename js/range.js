@@ -6,7 +6,7 @@ var range = new Object();
   module.RangeSlider = function () {
     //this.dateCount = Object.keys(assocArray).length;
     this.id = $("#dateRange");
-    this.text = $("#slider_value");
+    this.text = $("#showDateText");
 
     $(document).on("input change", "#dateRange", function () {
       rs.setValue($(this).val());
@@ -35,7 +35,7 @@ var range = new Object();
 
   p.setValue = function (val) {
     let dateString = this.dateArray[val];
-    this.text.html(dateString);
+    this.text.val(dateString);
     mainWidget.xfmrs.draw(dateString);
   };
 

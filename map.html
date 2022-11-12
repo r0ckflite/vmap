@@ -28,12 +28,11 @@
     </script>
   </head>
   <body>
-    <h1>Transformer Map</h1>
-
-    <div class="container">
-      <div class="row map-row-1">
-        <div class="col-5">
-          Start Date :
+    <div class="d-flex flex-column mb-3 container gm-container">
+      <h2>Transformer Modeler</h2>
+      <div class="d-flex align-items-start">
+        <div class="d-flex align-self-end gm-col">
+          <div class="gm-label">Start Date :</div>
           <input
             id="gm-start-date"
             class="form-control form-control-sm"
@@ -41,8 +40,8 @@
             placeholder="YYYY-MM-DD"
           />
         </div>
-        <div class="col-5">
-          End Date :
+        <div class="d-flex align-self-end gm-col">
+          <div class="gm-label">End Date :</div>
           <input
             id="gm-end-date"
             class="form-control form-control-sm"
@@ -50,16 +49,16 @@
             placeholder="YYYY-MM-DD"
           />
         </div>
-        <div class="col-2">
+        <div class="d-flex gm-col">
           <button id="loadData" type="button" class="btn btn-primary">
             Load Data
           </button>
         </div>
       </div>
-      <div class="row map-row-2">
-        <div class="col-10">
+      <div class="d-flex gm-init-hide">
+        <div class="flex-grow-1">
           <label class="form-label" for="customRange1">Select Date</label>
-          <div class="range">
+          <div class="range gm-col">
             <input
               type="range"
               id="dateRange"
@@ -68,11 +67,10 @@
             />
           </div>
         </div>
-        <div id="slider_value" class="col-2"></div>
       </div>
-      <div class="row map-row-3">
-        <div class="col-5">
-          Show Date/Hour
+      <div class="d-flex gm-init-hide">
+        <div class="d-flex align-self-end gm-col">
+          <div class="gm-label">Show Date/Hour :</div>
           <input
             id="showDateText"
             class="form-control form-control-sm"
@@ -81,13 +79,12 @@
           />
         </div>
 
-        <div class="col-2">
+        <div class="d-flex align-self-end gm-col">
           <button id="goto" type="button" class="btn btn-primary">
             Select
           </button>
         </div>
-        <div class="col-3"></div>
-        <div class="col-2">
+        <div class="d-flex align-self-end gm-col">
           <div class="form-check">
             <input
               class="form-check-input"
@@ -113,7 +110,7 @@
           </div>
         </div>
       </div>
-      <div id="googleMap" class="row" style="width: 100%; height: 600px"></div>
+      <div id="googleMap" class="p-2 flex-grow-1"></div>
     </div>
 
     <div

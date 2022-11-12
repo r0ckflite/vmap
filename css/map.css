@@ -3,9 +3,34 @@
 }
 
 #googleMap {
-    margin-top: 4px;
+    margin: 4px;
 }
 
 #slider_value {
     margin-top: 28px;
+}
+
+.gm-init-hide {
+    display: none!important;
+}
+
+.gm-label {
+    white-space:nowrap;
+    margin-top: 2px;
+}
+
+html, body {
+    height:100%;
+}
+
+.gm-container {
+    height: 100%;
+}
+
+.gm-col {
+    margin-right: 10px;
+}
+
+#alert1 {
+    width: 300px;
 }
