@@ -10,6 +10,15 @@
     margin-top: 28px;
 }
 
+.non-btn {
+    margin-top: 25px;
+    margin-right: 4px;
+}
+
+#graph1Modal .modal-content {
+    height: 600px;
+}
+
 .gm-init-hide {
     display: none!important;
 }

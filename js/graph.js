@@ -207,9 +207,10 @@ var grph = new Object();
         pointWidth: 4,
       },
     };
+
     obj.chart = {
       defaultSeriesType: "column",
-      height: 200,
+      height: 400,
       borderRadius: 0,
       rendorTo: "meterGraph",
       zoomType: "x",
@@ -249,6 +250,8 @@ var grph = new Object();
   ) {
     for (let i = 0; i < data.length; i++) {
       var obj = new Object();
+      var min = 500;
+      var max = 0;
 
       console.log(data);
 
@@ -273,32 +276,112 @@ var grph = new Object();
         },
       };
 
-      obj.yAxis = {
-        // min: this.kva + 5,
-        plotBands: [
-          {
-            color: "green",
-            from: 230,
-            to: 250,
-          },
-        ],
-      };
-
       obj.tooltip = { enabled: true };
       obj.credits = { enabled: false };
 
       obj.plotOptions = {
         column: {
           stacking: "normal",
-          pointWidth: 4,
+          //pointWidth: 4,
         },
       };
+
       obj.chart = {
-        defaultSeriesType: "column",
-        height: 200,
+        defaultSeriesType: "line",
+        height: 400,
         borderRadius: 0,
         rendorTo: "meterGraph",
         zoomType: "x",
+      };
+
+      obj.series = [];
+
+      s = new Object();
+      s.name = data[i].serial;
+      s.data = [];
+      s.color = "black";
+      let count = 0;
+
+      p = data[i].profiles;
+
+      for (let j = 0; j < p.length; j++) {
+        dt = p[j].date.split("-");
+
+        let v = p[j].Voltage;
+        for (let k = 0; k < v.length; k++) {
+          utcDate = Date.UTC(dt[0], dt[1] - 1, dt[2], k);
+          s.data.push([utcDate, Number(v[k])]);
+          if (v[k] < min) min = v[k];
+          if (v[k] > max) max = v[k];
+          count++;
+        }
+      }
+      obj.series.push(s);
+
+      let el = "gm-graph2-graph" + (i + 1);
+
+      obj.yAxis = {
+        min: Math.min(220, min - 10),
+        max: Math.max(260, max),
+        plotBands: [
+          {
+            color: "#D0F0C0",
+            from: 230,
+            to: 250,
+          },
+        ],
+      };
+
+      Highcharts.chart(el, obj);
+    }
+  };
+
+  p.buildGraphStackedBarVoltage2 = function (
+    data,
+    id,
+    startDate,
+    endDate,
+    typeString
+  ) {
+    for (let i = 0; i < data.length; i++) {
+      var obj = new Object();
+      var min = 500;
+      var max = 0;
+
+      console.log(data);
+
+      obj.title = {
+        text: data[i].serial,
+      };
+
+      obj.yAxis = {
+        title: {
+          text: "Number of Employees",
+        },
+      };
+
+      obj.xAxis = {
+        accessibility: {
+          rangeDescription: "Range: 2010 to 2020",
+        },
+      };
+
+      /*    obj.legend = {
+        layout: "vertical",
+        align: "right",
+        verticalAlign: "middle",
+      };*/
+
+      obj.tooltip = { enabled: true };
+      obj.credits = { enabled: false };
+
+      obj.plotOptions = {
+        series: {
+          label: {
+            connectorAllowed: false,
+          },
+          pointStart: 2010,
+        },
       };
 
       obj.series = [];
@@ -316,13 +399,33 @@ var grph = new Object();
         let v = p[j].Voltage;
         for (let k = 0; k < v.length; k++) {
           utcDate = Date.UTC(dt[0], dt[1] - 1, dt[2], k);
-          s.data.push([utcDate, Number(v[k])]);
+          s.data.push([Number(v[k])]);
+          if (v[k] < min) min = v[k];
+          if (v[k] > max) max = v[k];
           count++;
         }
       }
       obj.series.push(s);
 
       let el = "gm-graph2-graph" + (i + 1);
+
+      obj.responsive = {
+        rules: [
+          {
+            condition: {
+              maxWidth: 500,
+            },
+            chartOptions: {
+              legend: {
+                layout: "horizontal",
+                align: "center",
+                verticalAlign: "bottom",
+              },
+            },
+          },
+        ],
+      };
+
       Highcharts.chart(el, obj);
     }
   };

@@ -88,6 +88,20 @@ var main = new Object();
       rs.setDate(dateString);
     });
 
+    $("#range-buttons .rewind").click(function () {
+      $("#range-buttons .btn").removeClass("active");
+      rs.rewind();
+    });
+
+    $("#range-buttons .pause").click(function () {
+      rs.pause();
+    });
+
+    $("#range-buttons .play").click(function () {
+      $("#range-buttons .btn").removeClass("active");
+      rs.play();
+    });
+
     $("#radio1").change(function () {
       if (!that.isInitialized()) return;
       console.debug("value : " + this.value);

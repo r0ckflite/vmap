@@ -21,6 +21,7 @@ var configData = {
   showXfmrLabel: true,
   defaultStartDate: "2021-01-01",
   defaultEndDate: "2021-06-31",
+  playTimer: 500,
 };
 
 var config = new Object();
